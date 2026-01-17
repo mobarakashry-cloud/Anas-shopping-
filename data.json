@@ -1,0 +1,9 @@
+{
+  "categories": ["إلكترونيات", "ملابس", "أثاث", "سيارات"],
+  "products": [
+    {"id":1,"name":"هاتف ذكي","category":"إلكترونيات","price":300,"image":"assets/images/phone.jpg","video":"","audio":""},
+    {"id":2,"name":"قميص رجالي","category":"ملابس","price":50,"image":"assets/images/shirt.jpg","video":"","audio":""},
+    {"id":3,"name":"أريكة","category":"أثاث","price":200,"image":"assets/images/sofa.jpg","video":"","audio":""},
+    {"id":4,"name":"سيارة مستعملة","category":"سيارات","price":5000,"image":"assets/images/car.jpg","video":"","audio":""}
+  ]
+}
