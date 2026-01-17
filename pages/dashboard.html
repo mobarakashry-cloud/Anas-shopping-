@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>لوحة تحكم البائع</title>
+  <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+  <h1>لوحة تحكم البائع</h1>
+  <form id="addProductForm">
+    <input type="text" id="name" placeholder="اسم المنتج" required>
+    <input type="text" id="category" placeholder="الفئة" required>
+    <input type="number" id="price" placeholder="السعر" required>
+    <input type="text" id="image" placeholder="رابط الصورة">
+    <button type="submit">إضافة منتج</button>
+  </form>
+  <div id="productList"></div>
+
+  <script src="../js/dashboard.js"></script>
+</body>
+</html>
