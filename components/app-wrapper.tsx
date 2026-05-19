@@ -6,7 +6,9 @@ import { AuthLoadingScreen } from "./auth-loading-screen";
 
 function AppContent({ children }: { children: ReactNode }) {
   const { isAuthenticated } = usePiAuth();
-  if (!isAuthenticated) return <AuthLoadingScreen />;
+  const bypassAuth = process.env.NEXT_PUBLIC_BYPASS_AUTH === 'true';
+
+  if (!isAuthenticated && !bypassAuth) return <AuthLoadingScreen />;
   return <>{children}</>;
 }
 

@@ -45,22 +45,20 @@ export default function CartPage() {
   const total = subtotal + shipping;
 
   return (
-    <div className="min-h-screen bg-background pb-20 md:pb-0">
+    <div dir="rtl" className="min-h-screen bg-background pb-20 md:pb-0">
       <Header />
 
       <main className="container mx-auto px-4 py-6 max-w-6xl">
-        <h1 className="text-2xl md:text-3xl font-bold mb-6">Shopping Cart</h1>
+        <h1 className="text-2xl md:text-3xl font-bold mb-6">سلة التسوق</h1>
 
         {cartItems.length === 0 ? (
           <Card className="text-center py-16">
             <CardContent>
               <ShoppingBag className="h-16 w-16 mx-auto mb-4 text-muted-foreground" />
-              <h2 className="text-xl font-semibold mb-2">Your cart is empty</h2>
-              <p className="text-muted-foreground mb-6">
-                Start adding some products to your cart!
-              </p>
+              <h2 className="text-xl font-semibold mb-2">سلة التسوق فارغة</h2>
+              <p className="text-muted-foreground mb-6">ابدأ بإضافة منتجات إلى السلة</p>
               <Link href="/">
-                <Button>Continue Shopping</Button>
+                <Button>تابع التسوق</Button>
               </Link>
             </CardContent>
           </Card>
@@ -88,7 +86,7 @@ export default function CartPage() {
                           </h3>
                         </Link>
                         <p className="text-sm text-muted-foreground mb-2">
-                          by {item.product.seller}
+                          by {String(item.product.seller?.name ?? item.product.seller)}
                         </p>
                         <div className="flex items-center justify-between">
                           <p className="text-lg font-bold text-primary">
@@ -141,33 +139,33 @@ export default function CartPage() {
             <div className="md:col-span-1">
               <Card className="sticky top-20">
                 <CardHeader>
-                  <CardTitle>Order Summary</CardTitle>
+                  <CardTitle>ملخص الطلب</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
-                      <span className="text-muted-foreground">Subtotal</span>
+                      <span className="text-muted-foreground">المجموع الفرعي</span>
                       <span className="font-medium">{subtotal.toFixed(2)} π</span>
                     </div>
                     <div className="flex justify-between text-sm">
-                      <span className="text-muted-foreground">Shipping</span>
+                      <span className="text-muted-foreground">تكلفة الشحن</span>
                       <span className="font-medium">
-                        {shipping === 0 ? 'Free' : `${shipping.toFixed(2)} π`}
+                        {shipping === 0 ? 'مجاني' : `${shipping.toFixed(2)} π`}
                       </span>
                     </div>
                     {subtotal < 100 && (
                       <p className="text-xs text-muted-foreground">
-                        Add {(100 - subtotal).toFixed(2)} π more for free shipping
+                        أضف {(100 - subtotal).toFixed(2)} π أخرى للحصول على شحن مجاني
                       </p>
                     )}
                     <div className="border-t pt-2 flex justify-between font-semibold text-lg">
-                      <span>Total</span>
+                      <span>الإجمالي</span>
                       <span className="text-primary">{total.toFixed(2)} π</span>
                     </div>
                   </div>
 
                   <Button className="w-full" size="lg">
-                    Checkout with Pi
+                    الدفع عبر Pi
                   </Button>
 
                   <div className="text-center">
@@ -179,16 +177,16 @@ export default function CartPage() {
                   {/* Promo Code */}
                   <div className="border-t pt-4">
                     <details className="group">
-                      <summary className="text-sm font-medium cursor-pointer flex justify-between items-center">
-                        Have a promo code?
-                        <span className="group-open:rotate-180 transition-transform">
-                          ▼
-                        </span>
-                      </summary>
+                        <summary className="text-sm font-medium cursor-pointer flex justify-between items-center">
+                          هل لديك رمز خصم؟
+                          <span className="group-open:rotate-180 transition-transform">
+                            ▼
+                          </span>
+                        </summary>
                       <div className="mt-3 space-y-2">
                         <input
                           type="text"
-                          placeholder="Enter code"
+                          placeholder="أدخل الرمز"
                           className="w-full px-3 py-2 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                         />
                         <Button variant="outline" size="sm" className="w-full">

@@ -179,7 +179,7 @@ export default function SellPage() {
                           {product.name}
                         </h3>
                         <p className="text-sm text-muted-foreground mb-2">
-                          {product.price} π • {product.views || 234} views
+                          {product.price} π • {product.reviews} reviews
                         </p>
                         <div className="flex gap-2">
                           <Button size="sm" variant="outline">

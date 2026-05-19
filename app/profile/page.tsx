@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Header } from '@/components/header';
 import { BottomNav } from '@/components/bottom-nav';
-import { products } from '@/lib/mock-data';
+import { products, categories } from '@/lib/mock-data';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -69,6 +69,20 @@ export default function ProfilePage() {
             </div>
           </CardContent>
         </Card>
+
+          {/* Categories for user (same as main categories) */}
+          <div className="mb-6">
+            <h3 className="text-lg font-semibold mb-2">Categories</h3>
+            <div className="flex gap-3 overflow-x-auto px-1">
+              {categories.map((c) => (
+                <Link key={c.id} href={`/search?category=${encodeURIComponent(c.id)}`} className="flex-shrink-0">
+                  <span className="px-3 py-2 rounded-lg bg-gradient-to-r from-purple-600 to-purple-500 text-amber-100 text-sm font-medium shadow-sm">
+                    {c.name}
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="w-full grid grid-cols-4 mb-6">

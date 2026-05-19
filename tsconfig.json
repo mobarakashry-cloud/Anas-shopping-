@@ -1,27 +1,36 @@
 {
   "compilerOptions": {
+    "target": "ES2020",                // أحدث من ES6 ويدعم مزايا حديثة
     "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "target": "ES6",
-    "skipLibCheck": true,
-    "strict": true,
-    "noEmit": true,
-    "esModuleInterop": true,
+    "allowJs": true,                   // يسمح بملفات JS بجانب TS
+    "skipLibCheck": true,              // يتجاهل فحص مكتبات خارجية لتسريع البناء
+    "strict": true,                    // تفعيل الوضع الصارم لضمان جودة الكود
+    "noEmit": true,                    // يمنع إخراج ملفات JS (Next.js بيهتم بالبناء)
+    "esModuleInterop": true,           // يسهل التعامل مع مكتبات CommonJS
     "module": "esnext",
-    "moduleResolution": "bundler",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,         // يسمح باستيراد ملفات JSON
+    "isolatedModules": true,           // مطلوب مع Next.js
+    "jsx": "preserve",                 // يحافظ على JSX ليتعامل معه Next.js
+    "incremental": true,               // يحسن الأداء في البناء التدريجي
+    "forceConsistentCasingInFileNames": true, // يمنع مشاكل أسماء الملفات بين الأنظمة
     "plugins": [
       {
         "name": "next"
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"]                   // Alias لاختصار المسارات
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "next-env.d.ts",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    ".next"
+  ]
 }

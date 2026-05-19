@@ -26,7 +26,7 @@ export function ProductCard({ product }: ProductCardProps) {
           <Badge className="absolute top-2 left-2 capitalize">
             {product.condition}
           </Badge>
-          {product.videoUrl && (
+          {product.video && (
             <Badge variant="secondary" className="absolute top-2 right-2">
               📹 Video
             </Badge>
@@ -52,7 +52,7 @@ export function ProductCard({ product }: ProductCardProps) {
             <p className="text-lg font-bold text-primary">
               {product.price} <span className="text-sm font-normal">π</span>
             </p>
-            <p className="text-xs text-muted-foreground">by {product.seller}</p>
+            <p className="text-xs text-muted-foreground">by {product.seller.name}</p>
           </div>
           <div className="flex gap-1">
             <Button size="icon" variant="ghost" className="h-8 w-8">

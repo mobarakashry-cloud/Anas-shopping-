@@ -1,0 +1,42 @@
+﻿node.exe : [33mThe CJS build of Vite's Node API is deprecated. See 
+https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for 
+more details.[39m
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([33mThe CJS bu...e details.[39m 
+   :String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[33m[7m[33m Vitest [33m[27m "deps.inline" is deprecated. If you rely on 
+vite-node directly, use "server.deps.inline" instead. Otherwise, consider 
+using "deps.optimizer.web.include"[39m
+
+[7m[1m[36m RUN [39m[22m[27m [36mv1.6.1[39m [90mC:/Users/mobar/Documents/GitHub/Anas-shopping-[39m
+
+[90mstdout[2m | vitest.setup.js:6:9[22m[39m
+vitest.setup.js running
+
+[90mstdout[2m | __tests__/product-card.test.tsx[2m > [22m[2mProductCard[2m > [22m[2mrenders product info and seller name[22m[39m
+product-card: before import
+
+ [31m├ù[39m __tests__/product-card.test.tsx[2m > [22mProductCard[2m > [22mrenders product info and seller name[33m 120013[2mms[22m[39m
+[31m   ΓåÆ Test timed out in 120000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".[39m
+
+[31mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[1m[7m Failed Tests 1 
+[27m[22mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[39m
+
+[31m[1m[7m FAIL [27m[22m[39m __tests__/product-card.test.tsx[2m > 
+[22mProductCard[2m > [22mrenders product info and seller name
+[31m[1mError[22m: Test timed out in 120000ms.
+If this is a long-running test, pass a timeout value as the last argument or 
+configure it globally with "testTimeout".[39m
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»Γ
+Ä»[1/1]ΓÄ»[22m[39m
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m   Start at [22m 19:55:14
+[2m   Duration [22m 123.23s[2m (transform 145ms, setup 277ms, collect 589ms, tests 120.02s, environment 1.19s, prepare 347ms)[22m
+

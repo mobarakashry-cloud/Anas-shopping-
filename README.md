@@ -21,3 +21,34 @@ Anas Shopping is a smart and comprehensive marketplace app within Pi Browser tha
 - Featured listings / Promotions
 
 ## Repository Structure
+
+## Quick Start
+
+Install dependencies and run locally:
+
+```bash
+npm install
+npm run dev
+```
+
+Build for production:
+
+```bash
+npm run build
+npm start
+```
+
+Deployment
+
+- Recommended: deploy to Vercel for zero-config Next.js hosting: https://vercel.com/new
+- Docker option:
+
+```bash
+# build image
+docker build -t anas-shopping:latest .
+
+# run container
+docker run -p 3000:3000 anas-shopping:latest
+```
+
+Local deploy scripts are provided in `scripts/` for convenience.

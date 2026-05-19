@@ -72,6 +72,7 @@ export function PiAuthProvider({ children }: { children: ReactNode }) {
   const [authMessage, setAuthMessage] = useState("Initializing Pi Network...");
   const [piAccessToken, setPiAccessToken] = useState<string | null>(null);
   const [userData, setUserData] = useState<LoginDTO | null>(null);
+  const bypassAuth = process.env.NEXT_PUBLIC_BYPASS_AUTH === 'true';
 
   const authenticateAndLogin = async (): Promise<void> => {
     setAuthMessage("Authenticating with Pi Network...");
@@ -121,8 +122,14 @@ export function PiAuthProvider({ children }: { children: ReactNode }) {
   };
 
   useEffect(() => {
+    if (bypassAuth) {
+      setAuthMessage("Bypassing Pi Network authentication (dev)");
+      setIsAuthenticated(true);
+      return;
+    }
+
     initializePiAndAuthenticate();
-  }, []);
+  }, [bypassAuth]);
 
   const value: PiAuthContextType = {
     isAuthenticated,
