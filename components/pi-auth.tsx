@@ -158,7 +158,7 @@ export default function PiAuth() {
           </button>
 
           {/* Show mock sign-in controls when on localhost or if NEXT_PUBLIC_PI_MOCK=1 */}
-          {(typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || process.env.NEXT_PUBLIC_PI_MOCK === '1')) && (
+          {(typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || process.env.NEXT_PUBLIC_PI_MOCK === '1' || window.location.hostname === process.env.NEXT_PUBLIC_PROD_DOMAIN)) && (
             <div style={{ display: 'inline-flex', gap: 6, alignItems: 'center' }}>
               <input value={mockName} onChange={(e) => setMockName(e.target.value)} placeholder="dev user" style={{ padding: 6, borderRadius: 6 }} />
               <button onClick={mockSignIn} disabled={loading} style={{ background: 'crimson', color: 'white', padding: '6px 10px', borderRadius: 6 }}>
