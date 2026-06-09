@@ -1,0 +1,2 @@
+Open files log
+Now reading component files for diagnostics

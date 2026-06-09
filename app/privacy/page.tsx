@@ -1,6 +1,4 @@
 'use client';
-
-import { Header } from '@/components/header';
 import { BottomNav } from '@/components/bottom-nav';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -10,7 +8,7 @@ import Link from 'next/link';
 export default function PrivacyPolicyPage() {
   return (
     <div className="min-h-screen bg-background pb-20 md:pb-0">
-      <Header />
+      {/* Header is rendered globally in layout as a server component */}
 
       <main className="container mx-auto px-4 py-6 max-w-4xl">
         <Link href="/profile">

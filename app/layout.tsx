@@ -1,6 +1,8 @@
 import type React from "react";
 import type { Metadata } from "next";
 import { AppWrapper } from "@/components/app-wrapper";
+import PiAuth from "@/components/pi-auth";
+import HeaderServer from "@/components/header.server";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -26,6 +28,9 @@ export default function RootLayout({
         `}</style>
       </head>
       <body>
+        <PiAuth />
+        {/* Server header renders user info at SSR time */}
+        <HeaderServer />
         <AppWrapper>{children}</AppWrapper>
       </body>
     </html>

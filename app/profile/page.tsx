@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { Header } from '@/components/header';
 import { BottomNav } from '@/components/bottom-nav';
 import { products, categories } from '@/lib/mock-data';
 import { Button } from '@/components/ui/button';

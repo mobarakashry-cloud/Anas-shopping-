@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ShoppingCart, Heart, User, Search, Menu, Globe, Smartphone, Watch, Monitor } from 'lucide-react';
@@ -9,11 +9,34 @@ import Link from 'next/link';
 
 export function Header() {
   const [searchQuery, setSearchQuery] = useState('');
+  const [piUser, setPiUser] = useState<any>(null)
+  const [loadingUser, setLoadingUser] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
   const categories = [
     { label: 'موبايلات', Icon: Smartphone },
     { label: 'ساعات', Icon: Watch },
     { label: 'إلكترونيات', Icon: Monitor },
   ];
+
+  useEffect(() => {
+    let mounted = true
+    ;(async () => {
+      try {
+        setLoadingUser(true)
+        const res = await fetch('/api/auth/me')
+        if (!res.ok) return
+        const data = await res.json()
+        if (mounted) setPiUser(data.user || null)
+      } catch (e) {
+        // ignore
+      } finally {
+        if (mounted) setLoadingUser(false)
+      }
+    })()
+    return () => {
+      mounted = false
+    }
+  }, [])
 
   return (
     <header dir="rtl" className="sticky top-0 z-50 w-full border-b bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/80">
@@ -65,11 +88,41 @@ export function Header() {
                   </Badge>
               </Button>
             </Link>
-            <Link href="/profile">
-              <Button variant="ghost" size="icon">
-                <User className="h-5 w-5" />
-              </Button>
-            </Link>
+            {piUser ? (
+              <div className="relative">
+                <button
+                  onClick={() => setMenuOpen((s) => !s)}
+                  className="flex items-center gap-2 rounded px-2 py-1 hover:bg-muted"
+                >
+                  <span className="text-sm">{piUser?.username || piUser?.name || 'Pi User'}</span>
+                  <User className="h-5 w-5" />
+                </button>
+                {menuOpen && (
+                  <div className="absolute z-50 right-0 mt-2 w-40 rounded bg-popover p-2 shadow">
+                    <Link href="/profile" className="block px-2 py-1 hover:bg-muted rounded">الملف الشخصي</Link>
+                    <button
+                      className="w-full text-right px-2 py-1 hover:bg-muted rounded"
+                      onClick={async () => {
+                        try {
+                          await fetch('/api/auth/logout', { method: 'POST' })
+                          setPiUser(null)
+                        } catch (e) {
+                          // ignore
+                        }
+                      }}
+                    >
+                      تسجيل الخروج
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Link href="/profile">
+                <Button variant="ghost" size="icon">
+                  <User className="h-5 w-5" />
+                </Button>
+              </Link>
+            )}
           </div>
         </div>
 

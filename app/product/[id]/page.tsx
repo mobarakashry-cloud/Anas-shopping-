@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Header } from "@/components/header";
 import { BottomNav } from "@/components/bottom-nav";
 import { products } from "@/lib/mock-data";
 import { Button } from "@/components/ui/button";
@@ -36,7 +35,7 @@ export default function ProductDetailPage() {
   if (!product) {
     return (
       <div className="min-h-screen bg-background">
-        <Header />
+        {/* Header is rendered globally in layout as a server component */}
         <div className="container mx-auto px-4 py-16 text-center">
           <h1 className="text-2xl font-bold mb-4">المنتج غير موجود</h1>
           <Button onClick={() => router.push("/")}>العودة للرئيسية</Button>
@@ -49,8 +48,7 @@ export default function ProductDetailPage() {
 
   return (
     <div dir={selectedLanguage === "ar" ? "rtl" : "ltr"} className="min-h-screen bg-background pb-20 md:pb-0">
-      <Header />
-
+      {/* Header is rendered globally in layout as a server component */}
       <main className="container mx-auto px-4 py-4 max-w-6xl">
         <Button variant="ghost" size="sm" className="mb-4" onClick={() => router.back()}>
           <ChevronLeft className="h-4 w-4 mr-1" />

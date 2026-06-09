@@ -52,3 +52,29 @@ docker run -p 3000:3000 anas-shopping:latest
 ```
 
 Local deploy scripts are provided in `scripts/` for convenience.
+
+## Pi Authentication / Session
+
+This app includes Pi Network authentication integration. Set the following environment variables in production:
+
+- `SESSION_SECRET` — a strong secret used to HMAC-sign session IDs (required)
+- `REDIS_URL` — optional Redis connection string to persist sessions across instances (optional)
+
+You can copy `.env.example` to `.env` and fill values before running.
+
+### Local development and sandboxing
+
+If you're developing on `localhost` the Pi SDK may not behave as it does inside Pi Browser. For local testing you can:
+
+- Use the mock sign-in UI (appears automatically on `localhost`) to create a fake user. The mock sign-in sends an access token of the form `mock:<username>` which the server accepts in non-production or when `ALLOW_MOCK_PI=1` is set.
+- Or explicitly enable the mock UI by setting `NEXT_PUBLIC_PI_MOCK=1` in your environment.
+
+Example `.env` additions for local testing:
+
+```
+NEXT_PUBLIC_PI_MOCK=1
+ALLOW_MOCK_PI=1
+SESSION_SECRET=dev_secret_for_local
+```
+
+Note: never use `ALLOW_MOCK_PI=1` or a weak `SESSION_SECRET` in production.

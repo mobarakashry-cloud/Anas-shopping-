@@ -1,6 +1,4 @@
-'use client';
-
-import { Header } from '@/components/header';
+ 'use client';
 import { BottomNav } from '@/components/bottom-nav';
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
@@ -16,7 +14,7 @@ export default function MessagesPage() {
 
   return (
     <div className="min-h-screen bg-background pb-20 md:pb-0">
-      <Header />
+      {/* Header is rendered globally in layout as a server component */}
 
       <main className="container mx-auto px-4 py-6 max-w-4xl">
         <h1 className="text-2xl md:text-3xl font-bold mb-6">Messages</h1>

@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { Header } from '@/components/header';
 import { BottomNav } from '@/components/bottom-nav';
 import { products } from '@/lib/mock-data';
 import { Button } from '@/components/ui/button';
@@ -26,7 +25,7 @@ export default function SellPage() {
 
   return (
     <div className="min-h-screen bg-background pb-20 md:pb-0">
-      <Header />
+      {/* Header is rendered globally in layout as a server component */}
 
       <main className="container mx-auto px-4 py-6 max-w-7xl">
         <div className="mb-6">

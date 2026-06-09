@@ -2,9 +2,9 @@
 FROM node:18-alpine AS builder
 WORKDIR /app
 
-# Install dependencies
-COPY package*.json pnpm-lock.yaml ./
-RUN npm ci --only=production || npm install
+# Install dependencies (use legacy-peer-deps to avoid peer conflicts)
+COPY package*.json ./
+RUN npm install --production --legacy-peer-deps
 
 # Copy source and build
 COPY . .

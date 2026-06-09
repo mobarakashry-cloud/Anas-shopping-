@@ -3,6 +3,7 @@
     "target": "ES2020",                // أحدث من ES6 ويدعم مزايا حديثة
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,                   // يسمح بملفات JS بجانب TS
+    "baseUrl": ".",
     "skipLibCheck": true,              // يتجاهل فحص مكتبات خارجية لتسريع البناء
     "strict": true,                    // تفعيل الوضع الصارم لضمان جودة الكود
     "noEmit": true,                    // يمنع إخراج ملفات JS (Next.js بيهتم بالبناء)
