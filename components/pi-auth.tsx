@@ -1,12 +1,15 @@
 "use client"
+
 import React, { useEffect, useState } from 'react'
+import { PI_NETWORK_CONFIG } from '@/lib/system-config'
 
 async function loadPiSdk(): Promise<void> {
   if (typeof window === 'undefined') return
   if ((window as any).Pi) return
+  const src = (PI_NETWORK_CONFIG && (PI_NETWORK_CONFIG as any).SDK_URL) || 'https://sdk.minepi.com/pi-sdk.js'
   return new Promise((resolve, reject) => {
     const s = document.createElement('script')
-    s.src = 'https://api.minepi.com/sdk/pi.js'
+    s.src = src
     s.async = true
     s.onload = () => resolve()
     s.onerror = () => reject(new Error('Failed to load Pi SDK'))
@@ -23,29 +26,37 @@ export default function PiAuth() {
 
   async function authenticate() {
     setError(null)
-      try {
+    try {
       setLoading(true)
       await loadPiSdk()
       const Pi = (window as any).Pi
       if (!Pi) throw new Error('Pi SDK not available')
 
-      // ensure init is awaited as a Promise
+      // await Pi.init as a Promise before authenticating
       if (typeof Pi.init === 'function') {
-        await Pi.init({ appName: 'Anas Shopping' })
+        const appName = process.env.NEXT_PUBLIC_APP_NAME || 'Anas Shopping'
+        await Pi.init({ appName })
       }
 
-      let authResult
+      let authResult: any
       try {
+        // request username scope explicitly
+        console.debug('Calling Pi.authenticate with scope username')
         authResult = await Pi.authenticate({ scope: 'username' })
       } catch (e: any) {
-        // surface SDK error
         const msg = e?.message || String(e)
         setDebug(msg)
+        console.error('Pi.authenticate failed', { message: msg, err: e })
+        // Detect common user-gesture requirement errors
+        if (/gesture|user action|required/i.test(msg)) {
+          setDebug('Pi.authenticate requires a user gesture (tap the Sign in button).')
+        }
         throw new Error(`Pi SDK authenticate failed: ${msg}`)
       }
 
-      const accessToken = authResult?.accessToken || authResult?.token
-      if (!accessToken) throw new Error('No access token returned')
+      // support different token keys returned by SDK
+      const accessToken = authResult?.accessToken ?? authResult?.token ?? authResult?.code
+      if (!accessToken) throw new Error('No access token returned from Pi.authenticate')
 
       // send token to backend for validation and session creation with retries
       let attempts = 0

@@ -30,18 +30,37 @@ export async function POST(req: Request) {
     }
 
     // Validate token with Pi Network API
-    const res = await fetch('https://api.minepi.com/v2/me', {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    })
-
-    if (!res.ok) {
-      return NextResponse.json({ error: 'Invalid Pi token' }, { status: 401 })
+    let res
+    try {
+      res = await fetch('https://api.minepi.com/v2/me', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+    } catch (fetchErr) {
+      console.error('Pi /v2/me fetch error', { err: String(fetchErr) })
+      return NextResponse.json({ error: 'Pi validation request failed' }, { status: 502 })
     }
 
-    const user = await res.json()
+    const raw = await res.text()
+    // try parse JSON body for logging
+    let parsedBody: any = null
+    try {
+      parsedBody = raw ? JSON.parse(raw) : null
+    } catch (e) {
+      parsedBody = raw
+    }
+
+    console.debug('Pi /v2/me response', { status: res.status, body: parsedBody })
+
+    if (!res.ok) {
+      // In non-production expose debug info to assist debugging
+      const debugInfo = process.env.NODE_ENV === 'production' ? undefined : { status: res.status, body: parsedBody }
+      return NextResponse.json({ error: 'Invalid Pi token', debug: debugInfo }, { status: 401 })
+    }
+
+    const user = parsedBody
 
     // Create server-side session and set httpOnly session id cookie (do not store raw token)
     const sessionId = await createSession(user)
