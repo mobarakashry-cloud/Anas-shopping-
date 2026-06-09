@@ -29,6 +29,14 @@ Install dependencies and run locally:
 ```bash
 npm install
 npm run dev
+Production domain
+-----------------
+
+The application is deployed at https://anas-shopping.vercel.app. Vercel's current production deployment host is:
+
+- https://anas-shopping-933ukp46r-skillspark-hubs-projects.vercel.app
+
+Add both the custom domain and the Vercel host to your Pi Developer Portal app settings as allowed origins so Pi authentication works from the live site.
 ```
 
 Build for production:
